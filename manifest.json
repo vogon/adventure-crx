@@ -1,0 +1,13 @@
+{
+	"manifest_version": 2,
+	"name": "adventure",
+	"version": "1.0",
+	"description": "https://twitter.com/0xabad1dea/status/376786869113356288",
+	"permissions": [
+		"tabs"
+	],
+	"background": {
+		"page": "newtab.html",
+		"persistent": false
+	}
+}
