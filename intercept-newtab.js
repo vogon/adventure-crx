@@ -3,6 +3,7 @@ watched_tabs = []
 function interceptNewTab(tab)
 {
 	var interceptUrl = chrome.extension.getURL('newtab.html');
+	interceptUrl += "?exitUrl=" + encodeURIComponent(tab.url);
 
 	chrome.tabs.update(tab.id, { "url": interceptUrl });
 }
@@ -11,7 +12,7 @@ function handleTabCreated(tab)
 {
 	console.log("tab created with id " + tab.id);
 
-	if (tab.url == "chrome://newtab/")
+	if (tab.url.indexOf("chrome-search://") == 0)
 	{
 		console.log("intercepting at create");
 		interceptNewTab(tab);
@@ -32,7 +33,7 @@ function handleTabUpdated(tabId, changeInfo, tab)
 	{
 		console.log("changed tab is watched");
 
-		if (tab.url == "chrome://newtab/")
+		if (tab.url.indexOf("chrome-search://") == 0)
 		{
 			console.log("intercepting at change");
 			interceptNewTab(tab);
